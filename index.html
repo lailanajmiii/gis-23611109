@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>WebGIS</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
+    <style>
+      html,
+      body,
+      #map {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      // Initialize the map
+      var map = L.map("map").setView([-7.9, 110.45], 10); // Center map at -7.9, 110.45 with zoom level 10
+
+      // Define basemap layers
+      var Esri_WorldImagery = L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", {
+        attribution: "Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ",
+      });
+
+      // Add Esri World Imagery as the default basemap
+      Esri_WorldImagery.addTo(map);
+
+      // Define a custom icon for markers
+      var customIcon = L.icon({
+        iconUrl: "https://www.freeiconspng.com/uploads/maps-icon-11.png",
+        iconSize: [40, 40],
+      });
+
+      // Define marker locations with popup and tooltip
+      var locations = [
+        {
+          coords: [-8.00599862883622, 110.640559492555],
+          popup: "Klinik Pratama Rawat Inap Assyifa",
+          tooltip: "XJQH+RC Pacarejo, Gunung Kidul Regency, Yogyakarta",
+        },
+        {
+          coords: [-7.947668835217658, 110.67296030714816],
+          popup: "RSI Gunung Kidul",
+          tooltip: "2MWC+QF Ngipak, Gunung Kidul Regency, Yogyakarta",
+        },
+        {
+          coords: [-7.95888950850554, 110.65785410668173],
+          popup: "Rumah Sakit Panti Rahayu",
+          tooltip: "2MV5+F6 Kelor, Gunung Kidul Regency, Yogyakarta",
+        },
+        {
+          coords: [-7.935792939179839, 110.59840975148687],
+          popup: "RS. PKU Muhammadiyah Wonosari",
+          tooltip: "3H5R+QJF, Jl. Lkr. Utara, kemorosari II, Gunung Kidul, Yogyakarta",
+        },
+        {
+          coords: [-7.956722842456193, 110.61343713756426],
+          popup: "Bethesda Wonosari Hospital",
+          tooltip: "2JP8+X8 Selang, Gunung Kidul Regency, Yogyakarta",
+        },
+        {
+          coords: [-7.984429704373979, 110.64333434707922],
+          popup: "RSU Pelita Husada",
+          tooltip: "2J6J+8R Semanu, Gunung Kidul Regency, Yogyakarta",
+        },
+        {
+          coords: [-8.038544014093128, 110.50282922851576],
+          popup: "RSUD Saptosari",
+          tooltip: "XG33+XG Jetis, Gunung Kidul Regency, Yogyakarta",
+        },
+        {
+          coords: [-7.916826027007042, 110.57454106076857],
+          popup: "RS Nur Rohmah",
+          tooltip: "3HH6+3H Bandung, Gunung Kidul Regency, Yogyakarta",
+        },
+        {
+          coords: [-7.961167521921171, 110.61719691946726],
+          popup: "RSIA Allaudya",
+          tooltip: "2JP8+PP Selang, Gunung Kidul Regency, Yogyakarta",
+        },
+        {
+          coords: [-7.9152819, 110.595567],
+          popup: "Rumah Sakit Darurat",
+          tooltip: "Gunung Kidul Regency, Yogyakarta",
+        },
+      ];
+
+      // Add markers to the map
+      locations.forEach((location) => {
+        var marker = L.marker(location.coords, { icon: customIcon });
+        marker.bindPopup(location.popup);
+        marker.bindTooltip(location.tooltip);
+        marker.addTo(map);
+      });
+    </script>
+  </body>
+</html>
